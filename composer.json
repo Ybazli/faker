@@ -1,0 +1,19 @@
+{
+    "name": "ybazli/faker",
+    "description": "Persian fake data package for laravel",
+    "type": "laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ybazli",
+            "email": "Yashar.bazli@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+          "Ybazli\\Faker\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
