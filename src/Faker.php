@@ -202,8 +202,10 @@ class Faker
     public function fullName()
     {
         $firstName = $this->getRandomKey('firstName');
+
         $lastName = $this->getRandomKey('lastName');
-        return $firstName.' '.$lastName;
+        $lastName2 = $this->getRandomKey('firstName');
+        return $firstName.' '.$lastName2.' '.$lastName;
     }
 
     /**
@@ -219,6 +221,14 @@ class Faker
             $age = rand(18 , 50);
         }
         return $age;
+    }
+
+    /**
+     * return random address
+     */
+    public function address()
+    {
+        return $this->getRandomKey('address');
     }
 
 }

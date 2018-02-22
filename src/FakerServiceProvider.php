@@ -23,7 +23,7 @@ class FakerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('ybazli-faker' , function(){
+        $this->app->bind('Faker' , function(){
             return new Faker();
         });
     }

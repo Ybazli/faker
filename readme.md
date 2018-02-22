@@ -1,6 +1,6 @@
 # Persian Faker
-persian faker package for laravel . this package created for test your project with fake data not fo create spam .
-please do not use that for create a spam .
+persian faker package for laravel . This package created for test your project with fake data not for create spam .
+please do not use it for create spam .
 new options will comming soon .
 thanks and enjoy that.
 
@@ -20,14 +20,14 @@ composer require ybazli/faker
 Next add this line in your 'config/app.php' in the providers array:
 
 ```php
-Ybazli\Faker\FakerServiceProvider::class;
+Ybazli\Faker\FakerServiceProvider::class,
 ```
 ### Step 3
 
 Next add this line in your 'config/app.php' in the aliases array:
 
 ```php
-'Faker' => Ybazli\Faker\Facades\Faker::class
+'Faker' => Ybazli\Faker\Facades\Faker::class,
 ```
 Done :)
 

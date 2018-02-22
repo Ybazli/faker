@@ -10,6 +10,6 @@ class Faker extends Facade
 	
 	protected static function getFacadeAccessor(){
 
-		return 'ybazli-faker';
+		return 'Faker';
 	}
 }
