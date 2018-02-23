@@ -1,8 +1,5 @@
 # Persian Faker
-persian faker package for laravel . This package created for test your project with fake data not for create spam .
-please do not use it for create spam .
-new options will comming soon .
-thanks and enjoy that.
+Persian faker package for laravel . This package is created for testing your project with fake data not for create spam. please do not use it to create spam. New options are comming soon. Enjoy it, thanks.
 
 
 ## Installation
