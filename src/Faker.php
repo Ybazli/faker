@@ -122,7 +122,7 @@ class Faker
     /**
      * return a random tellphone number
      */
-    public function tellphone()
+    public function telephone()
     {
         $prefix = $this->getRandomKey('tellphone');
         return string('0' . $prefix . randomNumber(7));
