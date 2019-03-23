@@ -173,7 +173,7 @@ class Faker
      */
     public function mellicode()
     {
-        return randomNumber(10);
+        return randomNumber(11);
     }
 
     /**
