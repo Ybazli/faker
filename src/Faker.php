@@ -234,4 +234,12 @@ class Faker
         return $this->getRandomKey('company');
     }
 
+    /**
+     * return 24 length random number for ShabaCode
+     */
+    public function shabaCode()
+    {
+        return randomNumber(24);
+    }
+
 }
