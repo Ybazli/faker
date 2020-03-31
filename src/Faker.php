@@ -231,4 +231,12 @@ class Faker
         return $this->getRandomKey('address');
     }
 
+     /**
+     * return random company
+     */
+    public function company()
+    {
+        return $this->getRandomKey('company');
+    }
+
 }
