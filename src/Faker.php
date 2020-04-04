@@ -15,7 +15,7 @@ class Faker
         $this->objects = require __DIR__ . '/libs/library.php';
 
         // custom helper include
-        $this->object = require 'helper.php';
+        $this->object = require_once 'helper.php';
     }
 
     /**
@@ -25,15 +25,15 @@ class Faker
      */
     private function getRandomKey($object = null)
     {
-        $name  = 0;
+        $name = 0;
         $array = [];
 
         if (is_array($object)) {
             $array = $object;
-            $name  = array_rand($object);
+            $name = array_rand($object);
         } elseif (is_string($object)) {
             $array = $this->objects[$object];
-            $name  = array_rand($array);
+            $name = array_rand($array);
         }
 
         return string($array[$name]);
@@ -52,7 +52,7 @@ class Faker
      */
     public function lastName()
     {
-        $name  = $this->getRandomKey('firstName');
+        $name = $this->getRandomKey('firstName');
         $lname = $this->getRandomKey('lastName');
         return $name . ' ' . $lname;
     }
@@ -114,7 +114,7 @@ class Faker
     public function mobile()
     {
         $prefix = $this->getRandomKey('mobile');
-        $phone  = string('0' . $prefix . randomNumber(7));
+        $phone = string('0' . $prefix . randomNumber(7));
         return (strlen($phone) !== 11 ? $phone . rand(1, 10) : $phone);
 
     }
@@ -125,11 +125,6 @@ class Faker
     public function telephone()
     {
         $prefix = $this->getRandomKey('tellphone');
-        return string('0' . $prefix . randomNumber(7));
-    }
-    public function telephone()
-    {
-        $prefix = $this->getRandomKey('telephone');
         return string('0' . $prefix . randomNumber(7));
     }
 
@@ -163,7 +158,7 @@ class Faker
         } else {
             $domainName = strtolower(str_random(rand(5, 8)));
         }
-        $domain = $this->getRandomKey('protocol') . '://' .'www.'. $domainName . '.' . $this->getRandomKey('domain');
+        $domain = $this->getRandomKey('protocol') . '://' . 'www.' . $domainName . '.' . $this->getRandomKey('domain');
         return $domain;
 
     }
@@ -185,9 +180,9 @@ class Faker
      */
     public function birthday($sign = null)
     {
-        $year  = rand(1333, 1380);
+        $year = rand(1333, 1380);
         $mouth = rand(1, 12);
-        $day   = rand(1, 30);
+        $day = rand(1, 30);
         if (!is_null($sign)) {
             return $year . $sign . $mouth . $sign . $day;
         } else {
@@ -205,20 +200,20 @@ class Faker
 
         $lastName = $this->getRandomKey('lastName');
         $lastName2 = $this->getRandomKey('firstName');
-        return $firstName.' '.$lastName2.' '.$lastName;
+        return $firstName . ' ' . $lastName2 . ' ' . $lastName;
     }
 
     /**
-     * return random age 
+     * return random age
      * you can use $min for minimum start age and max for maximum age
      * if $min and $max is null return random age between 18-50 years;
      */
-    public function age($min = null , $max = null)
+    public function age($min = null, $max = null)
     {
-        if(!is_null($min) && !is_null($min)){
-            $age = rand($min , $max);
-        }else{
-            $age = rand(18 , 50);
+        if (!is_null($min) && !is_null($min)) {
+            $age = rand($min, $max);
+        } else {
+            $age = rand(18, 50);
         }
         return $age;
     }
@@ -229,6 +224,22 @@ class Faker
     public function address()
     {
         return $this->getRandomKey('address');
+    }
+
+    /**
+     * return random company
+     */
+    public function company()
+    {
+        return $this->getRandomKey('company');
+    }
+
+    /**
+     * return 24 length random number for ShabaCode
+     */
+    public function shabaCode()
+    {
+        return randomNumber(24);
     }
 
 }
