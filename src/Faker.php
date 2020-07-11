@@ -8,7 +8,6 @@ namespace Ybazli\Faker;
 
 class Faker
 {
-
     public function __construct()
     {
         //include librrary array
@@ -115,8 +114,7 @@ class Faker
     {
         $prefix = $this->getRandomKey('mobile');
         $phone = string('0' . $prefix . randomNumber(7));
-        return (strlen($phone) !== 11 ? $phone . rand(1, 10) : $phone);
-
+        return (strlen($phone) !== 11 ? $phone . rand(1, 9) : $phone);
     }
 
     /**
@@ -160,7 +158,6 @@ class Faker
         }
         $domain = $this->getRandomKey('protocol') . '://' . 'www.' . $domainName . '.' . $this->getRandomKey('domain');
         return $domain;
-
     }
 
     /**
@@ -241,5 +238,4 @@ class Faker
     {
         return randomNumber(24);
     }
-
 }
