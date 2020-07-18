@@ -6,6 +6,8 @@
 
 namespace Ybazli\Faker;
 
+use Illuminate\Support\Str;
+
 class Faker
 {
     public function __construct()
@@ -66,9 +68,9 @@ class Faker
     public function email($count = null)
     {
         if (!is_null($count)) {
-            $mail = strtolower(str_random($count));
+            $mail = strtolower(Str::random($count));
         } else {
-            $mail = strtolower(str_random(rand(6, 10)));
+            $mail = strtolower(Str::random(rand(6, 10)));
         }
         $email = $mail . $this->getRandomKey('email');
         return $email;
@@ -152,9 +154,9 @@ class Faker
     public function domain($length = null)
     {
         if (!is_null($length)) {
-            $domainName = strtolower(str_random($length));
+            $domainName = strtolower(Str::random($length));
         } else {
-            $domainName = strtolower(str_random(rand(5, 8)));
+            $domainName = strtolower(Str::random(rand(5, 8)));
         }
         $domain = $this->getRandomKey('protocol') . '://' . 'www.' . $domainName . '.' . $this->getRandomKey('domain');
         return $domain;
