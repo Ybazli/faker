@@ -20,7 +20,7 @@ class Faker
      */
     public function __construct()
     {
-        //include librrary array
+        //include library array
         $this->libs = require __DIR__ . '/libs/library.php';
 
         // custom helper include
