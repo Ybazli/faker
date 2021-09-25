@@ -10,52 +10,43 @@ use Illuminate\Support\Str;
 
 class Faker
 {
+    private $library;
+
     public function __construct()
     {
-        //include librrary array
-        $this->objects = require __DIR__ . '/libs/library.php';
-
-        // custom helper include
-        $this->object = require_once 'helper.php';
+        //include library array
+        $this->library = require __DIR__ . '/libs/library.php';
     }
 
     /**
      * return random data in object
-     * $object is a name of index of librrary
-     * @author Ybazli
+     * $object is a name of index of library
+     * @param string $key
+     * @return string
      */
-    private function getRandomKey($object = null)
+    private function getRandomKey(string $key): string
     {
-        $name = 0;
-        $array = [];
+        $array = $this->library[$key];
 
-        if (is_array($object)) {
-            $array = $object;
-            $name = array_rand($object);
-        } elseif (is_string($object)) {
-            $array = $this->objects[$object];
-            $name = array_rand($array);
-        }
-
-        return string($array[$name]);
+        return (string)$array[array_rand($array)];
     }
 
     /**
      * return a random first name
+     * @return string
      */
-    public function firstName()
+    public function firstName(): string
     {
         return $this->getRandomKey('firstName');
     }
 
     /**
      * return a random last name
+     * @return string
      */
-    public function lastName()
+    public function lastName(): string
     {
-        $name = $this->getRandomKey('firstName');
-        $lname = $this->getRandomKey('lastName');
-        return $name . ' ' . $lname;
+        return $this->getRandomKey('firstName') . ' ' . $this->getRandomKey('lastName');
     }
 
     /**
@@ -63,83 +54,97 @@ class Faker
      * it's a random and fake email address not ussable
      * gmail , yahoo , msn , hotmail domain
      * $count is length of email address string
-     * if not set parametr to method auto return random between 6-10 length string
+     * if not set parameters to method auto return random between 6-10 length string
+     *
+     * @param int $count
+     * @return string
      */
-    public function email($count = null)
+    public function email(int $count = 0): string
     {
-        if (!is_null($count)) {
-            $mail = strtolower(Str::random($count));
-        } else {
-            $mail = strtolower(Str::random(rand(6, 10)));
+        if (!$count) {
+            $count = rand(6, 10);
         }
-        $email = $mail . $this->getRandomKey('email');
-        return $email;
+
+        $mail = strtolower(Str::random($count));
+
+        return $mail . $this->getRandomKey('email');
     }
 
     /**
      * return a random of job title
+     * @return string
      */
-    public function jobTitle()
+    public function jobTitle(): string
     {
         return $this->getRandomKey('jobTitle');
     }
 
     /**
      * return a random word
+     * @return string
      */
-    public function word()
+    public function word(): string
     {
         return $this->getRandomKey('word');
     }
 
     /**
      * return a random sentence
+     * @return string
      */
-    public function sentence()
+    public function sentence(): string
     {
         return $this->getRandomKey('sentence') . '.';
     }
 
     /**
      * return a random paragraph
+     * @return string
      */
-    public function paragraph()
+    public function paragraph(): string
     {
         return $this->getRandomKey('paragraph') . '.';
     }
 
     /**
-     * return a random mobile phone number
-     * return random 10 legnth number with iranian mobile mobile code like : 0912 , ...
+     * * return a random mobile phone number
+     * return random 10 length number with iranian mobile code like : 0912 , ...
+     *
+     * @param string $code
+     * @return string
      */
-    public function mobile()
+    public function mobile(string $code = '+98'): string
     {
-        $prefix = $this->getRandomKey('mobile');
-        $phone = string('0' . $prefix . randomNumber(7));
-        return (strlen($phone) !== 11 ? $phone . rand(1, 9) : $phone);
+        $cityCode = $this->getRandomKey('mobile');
+
+        return (string)$code . $cityCode . $this->generateRandomStringInteger(7);
     }
 
     /**
-     * return a random tellphone number
+     * @param string $countryCode
+     * @return string
      */
-    public function telephone()
+    public function telephone(string $countryCode = '0'): string
     {
-        $prefix = $this->getRandomKey('tellphone');
-        return string('0' . $prefix . randomNumber(7));
+        $cityCode = $this->getRandomKey('telephone');
+
+        return (string)$countryCode . $cityCode . $this->generateRandomStringInteger(7);
     }
 
     /**
      * return random city of iran
+     * @return string
      */
-    public function city()
+    public function city(): string
     {
         return $this->getRandomKey('city');
     }
 
     /**
-     * return random state of iran
+     * random state of iran
+     * @return string
      */
-    public function state()
+    public function state(): string
     {
         return $this->getRandomKey('state');
     }
@@ -147,97 +152,113 @@ class Faker
     /**
      * return a random domain address .
      * $length is length of domain name
-     * if not set parametr to method auto return random between 5-8 length string
-     * tlds are like com , net , ir , co , co.ir , ...
+     * if not set parameter to method auto return random between 5-8 length string
+     * TLD's are like com , net , ir , co , co.ir , ...
      * random web protocol http & https
+     * @param int $length
+     * @return string
      */
-    public function domain($length = null)
+    public function domain(int $length = 0): string
     {
-        if (!is_null($length)) {
-            $domainName = strtolower(Str::random($length));
-        } else {
-            $domainName = strtolower(Str::random(rand(5, 8)));
+        if (!$length) {
+            $length = rand(5, 8);
         }
-        $domain = $this->getRandomKey('protocol') . '://' . 'www.' . $domainName . '.' . $this->getRandomKey('domain');
-        return $domain;
+
+        $domainName = strtolower(Str::random($length));
+
+        return $this->getRandomKey('protocol') . '://' . $domainName . '.' . $this->getRandomKey('domain');
     }
 
     /**
-     * return 10 length random number
+     * 10 length random number
+     * @return int
      */
-    public function mellicode()
+    public function melliCode(): int
     {
-        return randomNumber(10);
+        return $this->generateRandomStringInteger(10);
     }
 
     /**
      * return a random birthday date
-     * year strating from 1333 - 1380
+     * year starting from 1333 / 1380
      * $sign to sign between year mouth year
      * default sign is '/'
      * return year/mouth/day
+     * @param string $sign
+     * @return string
      */
-    public function birthday($sign = null)
+    public function birthday(string $sign = '/'): string
     {
         $year = rand(1333, 1380);
         $mouth = rand(1, 12);
         $day = rand(1, 30);
-        if (!is_null($sign)) {
-            return $year . $sign . $mouth . $sign . $day;
-        } else {
-            $sign = '/';
-            return $year . $sign . $mouth . $sign . $day;
-        }
+
+        return $year . $sign . $mouth . $sign . $day;
     }
 
     /**
-     * return a random first name and last name together
+     * random first name and last name together
+     *
+     * @return string
      */
-    public function fullName()
+    public function fullName(): string
     {
-        $firstName = $this->getRandomKey('firstName');
-
-        $lastName = $this->getRandomKey('lastName');
-        $lastName2 = $this->getRandomKey('firstName');
-        return $firstName . ' ' . $lastName2 . ' ' . $lastName;
+        return $this->firstName() . ' ' . $this->lastName();
     }
 
     /**
-     * return random age
-     * you can use $min for minimum start age and max for maximum age
+     * * you can use $min for minimum start age and max for maximum age
      * if $min and $max is null return random age between 18-50 years;
+     * @param int $min
+     * @param int $max
+     * @return int
      */
-    public function age($min = null, $max = null)
+    public function age(int $min = 18, int $max = 50): int
     {
-        if (!is_null($min) && !is_null($min)) {
-            $age = rand($min, $max);
-        } else {
-            $age = rand(18, 50);
-        }
-        return $age;
+        return rand($min, $max);
     }
 
     /**
-     * return random address
+     * random fake address
+     * @return string
      */
-    public function address()
+    public function address(): string
     {
         return $this->getRandomKey('address');
     }
 
     /**
-     * return random company
+     * random company name
+     * @return string
      */
-    public function company()
+    public function company(): string
     {
         return $this->getRandomKey('company');
     }
 
     /**
-     * return 24 length random number for ShabaCode
+     * generate 24 length random number for ShabaCode
+     * @return int
      */
-    public function shabaCode()
+    public function shabaCode(): int
     {
-        return randomNumber(24);
+        return $this->generateRandomStringInteger(24);
+    }
+
+    /**
+     * @param int $length
+     * @return string
+     */
+    private function generateRandomStringInteger(int $length = 20): string
+    {
+        $stringInteger = '';
+
+        for ($i = 1; $i <= $length; $i++) {
+            $num = rand(0, 9);
+
+            $stringInteger .= $num;
+        }
+
+        return (string)$stringInteger;
     }
 }
