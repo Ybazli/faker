@@ -60,9 +60,9 @@ class Faker
     }
 
     /**
-     * return a random and invalid email address.
-     * with one of domains gmail, yahoo, msn or hotmail
-     * @param int count username length of email address  
+     * return a random and invalid email address
+     * with one of domains gmail, yahoo, msn or hotmail.
+     * @param int $count username length of email address  
      * if null is given it will return an email with random username length from 6 to 10
      * @return string 
      */
