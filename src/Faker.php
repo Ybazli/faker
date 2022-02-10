@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Ybazli/Faker package
  * @ybazli
@@ -59,25 +60,25 @@ class Faker
     }
 
     /**
-     * return a random email address .
-     * it's a random and fake email address not ussable
-     * gmail , yahoo , msn , hotmail domain
-     * $count is length of email address string
-     * if not set parametr to method auto return random between 6-10 length string
+     * return a random and invalid email address
+     * with one of domains gmail, yahoo, msn or hotmail.
+     * @param int $count username length of email address  
+     * if null is given it will return an email with random username length from 6 to 10
+     * @return string 
      */
-    public function email($count = null)
+    public function email(int $count = null)
     {
-        if (!is_null($count)) {
+        if (isset($count)) {
             $mail = strtolower(Str::random($count));
         } else {
             $mail = strtolower(Str::random(rand(6, 10)));
         }
-        $email = $mail . $this->getRandomKey('email');
-        return $email;
+
+        return $mail . $this->getRandomKey('email');
     }
 
     /**
-     * return a random of job title
+     * return a random job title
      */
     public function jobTitle()
     {
