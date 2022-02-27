@@ -241,4 +241,28 @@ class Faker
     {
         return randomNumber(24);
     }
+    /**
+     * return random persian productCategory
+     */
+    public function productCategory()
+    {
+        return $this->getRandomKey('productCategory');
+    }
+
+    /**
+     * return random number between {0-5}
+     */
+    public function star()
+    {
+        return rand(1,5);
+    }
+
+    /**
+     * @param int $length
+     * return random price IRR
+     */
+    public function price($length = 6)
+    {
+        return number_format(randomNumber(2) . str_repeat("0", $length));
+    }
 }
