@@ -249,13 +249,6 @@ class Faker
         return $this->getRandomKey('productCategory');
     }
 
-    /**
-     * return random number between {0-5}
-     */
-    public function star()
-    {
-        return rand(1,5);
-    }
 
     /**
      * @param int $length
